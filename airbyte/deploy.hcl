@@ -59,7 +59,7 @@ step "kube-init" {
     "kube-init",
   ]
 
-  sha     = "h1:achsmg+d8q5SNxmcmBhNif9jTIzJBBcOw9MAZ/6/fX4="
+  sha     = "h1:utKevg7aVAHYEkdmqEkti6dsyu0CMOm63kEom3w7Aqk="
   retries = 0
   verbose = false
 }
@@ -91,7 +91,7 @@ step "bounce" {
     "airbyte",
   ]
 
-  sha     = "h1:aYyxu0Jn5jTPTxwcQvCfrJovwVjXdE/SVMHXW0/rmTI="
+  sha     = "h1:FCqTRTjaoQNGmpel0aOXBsCdRs411rHbDhV5xZRDdLk="
   retries = 2
   verbose = false
 }
