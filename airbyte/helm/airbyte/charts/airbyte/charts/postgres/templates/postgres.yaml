@@ -1,0 +1,71 @@
+apiVersion: acid.zalan.do/v1
+kind: postgresql
+metadata:
+  name: {{ include "postgres.crd-name" . }}
+  labels:
+  {{ include "postgres.labels" . | nindent 4 }}
+  {{- with .Values.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  teamId: {{ .Values.team }}
+  {{- if .Values.clone }}
+  clone:
+  {{ toYaml .Values.clone | nindent 4 }}
+  {{- end }}
+  {{- if .Values.enableConnectionPooler }}
+  enableConnectionPooler: {{ .Values.enableConnectionPooler }}
+  {{- end }}
+  {{- if .Values.enableReplicaConnectionPooler }}
+  enableReplicaConnectionPooler: {{ .Values.enableReplicaConnectionPooler }}
+  {{- end }}
+  {{- with .Values.connectionPooler }}
+  connectionPooler:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  volume:
+    size: {{ .Values.storage.size }}
+  numberOfInstances: {{ .Values.replicas }}
+  users:
+    {{ .Values.user }}:  # database owner
+    - superuser
+    - createdb
+    {{- range .Values.extraUsers }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  resources:
+  {{- mergeOverwrite .Values.default.resources .Values.resources | toYaml | nindent 4 }}
+  databases:
+    {{ .Values.user }}: {{ .Values.dbName }}  # dbname: owner
+    {{- range $key, $value := .Values.extraDBs }}
+    {{ $value }}: {{ $key }}
+    {{- end }}
+  postgresql:
+    version: {{ .Values.version | quote }}
+    {{ if .Values.parameters }}
+    parameters:
+    {{ toYaml .Values.parameters | nindent 6 }}
+    {{ end }}
+  sidecars:
+  - image: {{ .Values.exporter.image.repository }}:{{ .Values.exporter.image.tag }}
+    name: exporter
+    resources:
+    {{- mergeOverwrite .Values.exporter.default.resources .Values.exporter.resources | toYaml | nindent 7 }}
+    ports:
+    - containerPort: 9187
+      name: http-metrics
+      protocol: TCP
+    env:
+    - name: "DATA_SOURCE_URI"
+      value: "127.0.0.1:5432/{{ .Values.dbName }}?sslmode=disable"
+    - name: "DATA_SOURCE_USER"
+      valueFrom:
+        secretKeyRef:
+          name: postgres.{{ include "postgres.crd-name" . }}.credentials.postgresql.acid.zalan.do
+          key: username
+    - name: "DATA_SOURCE_PASS"
+      valueFrom:
+        secretKeyRef:
+          name: postgres.{{ include "postgres.crd-name" . }}.credentials.postgresql.acid.zalan.do
+          key: password

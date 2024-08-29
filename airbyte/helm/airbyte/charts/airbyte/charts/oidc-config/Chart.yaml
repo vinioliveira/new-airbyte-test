@@ -1,0 +1,6 @@
+apiVersion: v2
+appVersion: 1.16.0
+description: Populates basic oauth2 proxy config for use with plural's oauth2 injector
+name: oidc-config
+type: application
+version: 0.1.6

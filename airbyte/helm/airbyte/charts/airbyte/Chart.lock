@@ -1,0 +1,15 @@
+dependencies:
+- name: airbyte
+  repository: file://../../../../airbyte/charts/airbyte
+  version: 0.43.22
+- name: postgres
+  repository: https://pluralsh.github.io/module-library
+  version: 0.1.16
+- name: oidc-config
+  repository: https://pluralsh.github.io/module-library
+  version: 0.1.6
+- name: test-base
+  repository: https://pluralsh.github.io/module-library
+  version: 0.1.10
+digest: sha256:ed639f495499e5e17fd1411dd87a91f7d1fd3fb97a4581fbca9272ed59276b91
+generated: "2023-06-13T11:20:29.904231-04:00"

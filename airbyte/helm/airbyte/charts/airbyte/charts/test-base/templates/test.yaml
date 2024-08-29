@@ -1,0 +1,17 @@
+apiVersion: test.plural.sh/v1alpha1
+kind: TestSuite
+metadata:
+  name: {{ .Values.testName }}-{{ randAlphaNum 5 | lower }}
+  labels:
+    {{- include "test-base.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+spec:
+  repository: {{ .Values.application }}
+  promoteTag: {{ .Values.promoteTag }}
+  {{- with .Values.tags }}
+  tags:
+  {{ toYaml . | nindent 2 }}
+  {{- end }}
+  steps:
+  {{- tpl (toYaml .Values.steps) . |  nindent 2 }}
