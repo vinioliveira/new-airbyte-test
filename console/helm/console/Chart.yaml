@@ -1,0 +1,14 @@
+apiVersion: v2
+name: console
+description: A helm chart for console
+version: 0.1.0
+appVersion: 0.10.23
+dependencies:
+- name: console
+  version: 0.10.49
+  repository: cm://app.plural.sh/cm/console
+  condition: console.enabled
+- name: kas
+  version: 0.1.0
+  repository: cm://app.plural.sh/cm/console
+  condition: kas.enabled

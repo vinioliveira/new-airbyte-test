@@ -1,0 +1,9 @@
+dependencies:
+- name: console
+  repository: cm://app.plural.sh/cm/console
+  version: 0.10.49
+- name: kas
+  repository: cm://app.plural.sh/cm/console
+  version: 0.1.0
+digest: sha256:2814d3fa56b7a07dba0de2342d7479a9f1f47755bd272fbc64dce4c2dff27be8
+generated: "2024-08-30T12:52:05.160374-03:00"

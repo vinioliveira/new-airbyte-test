@@ -1,11 +1,11 @@
 metadata {
-  path = "airbyte"
+  path = "console"
   name = "deploy"
 }
 
 step "terraform-init" {
-  wkdir   = "airbyte/terraform"
-  target  = "airbyte/terraform"
+  wkdir   = "console/terraform"
+  target  = "console/terraform"
   command = "terraform"
 
   args = [
@@ -13,14 +13,14 @@ step "terraform-init" {
     "-upgrade",
   ]
 
-  sha     = "h1:qCEcfDHS4P0naox/lnp+WW6PyXZ0ObbM82bG8AKlFf4="
+  sha     = "h1:Zv6moAt18uvPYc6BeDFYHiioTFZAdS7oHKHD5+J+F2w="
   retries = 0
   verbose = false
 }
 
 step "terraform-apply" {
-  wkdir   = "airbyte/terraform"
-  target  = "airbyte/terraform"
+  wkdir   = "console/terraform"
+  target  = "console/terraform"
   command = "terraform"
 
   args = [
@@ -28,30 +28,30 @@ step "terraform-apply" {
     "-auto-approve",
   ]
 
-  sha     = "h1:qCEcfDHS4P0naox/lnp+WW6PyXZ0ObbM82bG8AKlFf4="
+  sha     = "h1:Zv6moAt18uvPYc6BeDFYHiioTFZAdS7oHKHD5+J+F2w="
   retries = 2
   verbose = false
 }
 
 step "terraform-output" {
-  wkdir   = "airbyte"
-  target  = "airbyte/terraform"
+  wkdir   = "console"
+  target  = "console/terraform"
   command = "plural"
 
   args = [
     "output",
     "terraform",
-    "airbyte",
+    "console",
   ]
 
-  sha     = "h1:qCEcfDHS4P0naox/lnp+WW6PyXZ0ObbM82bG8AKlFf4="
+  sha     = "h1:Zv6moAt18uvPYc6BeDFYHiioTFZAdS7oHKHD5+J+F2w="
   retries = 0
   verbose = false
 }
 
 step "kube-init" {
-  wkdir   = "airbyte"
-  target  = "airbyte"
+  wkdir   = "console"
+  target  = "console"
   command = "plural"
 
   args = [
@@ -59,39 +59,39 @@ step "kube-init" {
     "kube-init",
   ]
 
-  sha     = "h1:b1XZ6Y6ElC1RyK/P3XTOTpSty9u1aya3CBX2zhUCsAE="
+  sha     = "h1:06SqQotbzdPTmi63SIWgA2JxOsP6Cb98p5TEv03dZcQ="
   retries = 0
   verbose = false
 }
 
 step "crds" {
-  wkdir   = "airbyte"
-  target  = "airbyte/crds"
+  wkdir   = "console"
+  target  = "console/crds"
   command = "plural"
 
   args = [
     "wkspace",
     "crds",
-    "airbyte",
+    "console",
   ]
 
-  sha     = "h1:47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU="
+  sha     = "h1:nw91TOQgqiRtjgksB9lntPtVR4ktmQSlCHPsIbNmmTo="
   retries = 0
   verbose = false
 }
 
 step "bounce" {
-  wkdir   = "airbyte"
-  target  = "airbyte/helm"
+  wkdir   = "console"
+  target  = "console/helm"
   command = "plural"
 
   args = [
     "wkspace",
     "helm",
-    "airbyte",
+    "console",
   ]
 
-  sha     = "h1:Qbt4jx+EE3ceNiX1IDYWp5hovSoFe0MHAJsWN1tM8Kc="
+  sha     = "h1:B8sOq3meaKXEiUw/I3Z6ToHrFBl33Q3LGXmcO80rFqo="
   retries = 2
   verbose = false
 }
