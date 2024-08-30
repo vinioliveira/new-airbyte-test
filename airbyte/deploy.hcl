@@ -13,7 +13,7 @@ step "terraform-init" {
     "-upgrade",
   ]
 
-  sha     = "h1:qCEcfDHS4P0naox/lnp+WW6PyXZ0ObbM82bG8AKlFf4="
+  sha     = ""
   retries = 0
   verbose = false
 }
@@ -28,7 +28,7 @@ step "terraform-apply" {
     "-auto-approve",
   ]
 
-  sha     = "h1:qCEcfDHS4P0naox/lnp+WW6PyXZ0ObbM82bG8AKlFf4="
+  sha     = ""
   retries = 2
   verbose = false
 }
@@ -44,7 +44,7 @@ step "terraform-output" {
     "airbyte",
   ]
 
-  sha     = "h1:qCEcfDHS4P0naox/lnp+WW6PyXZ0ObbM82bG8AKlFf4="
+  sha     = ""
   retries = 0
   verbose = false
 }
@@ -59,7 +59,7 @@ step "kube-init" {
     "kube-init",
   ]
 
-  sha     = "h1:b1XZ6Y6ElC1RyK/P3XTOTpSty9u1aya3CBX2zhUCsAE="
+  sha     = ""
   retries = 0
   verbose = false
 }
@@ -75,7 +75,7 @@ step "crds" {
     "airbyte",
   ]
 
-  sha     = "h1:47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU="
+  sha     = ""
   retries = 0
   verbose = false
 }
@@ -91,7 +91,7 @@ step "bounce" {
     "airbyte",
   ]
 
-  sha     = "h1:Qbt4jx+EE3ceNiX1IDYWp5hovSoFe0MHAJsWN1tM8Kc="
+  sha     = ""
   retries = 2
   verbose = false
 }
